@@ -1,0 +1,15 @@
+.customBtn{
+    width: 160px;
+    padding: 15px;
+    background-color: brown;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.2s ease-in;
+
+    &:hover{
+        background-color:rgba($color: brown, $alpha: 0.8)
+    }
+}

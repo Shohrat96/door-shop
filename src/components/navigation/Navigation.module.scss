@@ -1,0 +1,11 @@
+.navWrapper{
+    
+    & >ul{
+        height: 100%;
+        display: flex;
+        align-items: center;
+        &>li{
+            line-height: 80px;
+        }
+    }
+}

@@ -1,0 +1,31 @@
+.container{
+    & .titleSection{
+        display: flex;
+        margin-bottom: 2rem;
+    }
+    & .products{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        .cardWrapper{
+            position: relative;
+
+            & .deleteBtn{
+                position: absolute;
+                top: -20px;
+                right: 10px;
+                font-weight: bold;
+                font-size: 1.2rem;
+                cursor: pointer;
+            }
+        }
+    }
+    & .title{
+        text-align: center;
+        font-weight: bolder;
+        font-size: 24px;
+        display: inline-block;
+        margin: 0 auto;
+    }
+    
+}

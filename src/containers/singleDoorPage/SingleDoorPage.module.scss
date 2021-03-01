@@ -1,0 +1,71 @@
+.container{
+    display: flex;
+    & .imgWrap{
+        width: 25%;
+        margin-right: 40px;
+        & .img{
+           width: 100%;
+        }
+    }
+    & .imageData{
+        & .seperator{
+            border: 1px dashed rgba($color: gray, $alpha: 0.5);
+            width: 80%;
+            margin: 20px 0;
+        }
+        & .order{
+            display: flex;
+            flex-direction: column;
+            & .countField{
+                margin-bottom: 1rem;
+                max-width: 100px;
+                padding: 8px;
+                font-weight: bold;
+                font-size: 16px;
+                outline: none;
+            }
+        }
+
+        & .metaField{
+            padding: 5px;
+            margin: 0;
+            & .metaLabel{
+                font-size: 16px;
+                font-weight: bold;
+            }
+            & .metaValue{
+                margin: 0;
+            }
+        }
+        & .title{
+            padding-top: 0;
+            font-size: 35px
+        }
+        & .price{
+            font-weight: bold;
+            padding:8px;
+            background-color: brown;
+            display: inline-block;
+            position: relative;
+            color: #fff;
+            margin-bottom: 1rem;
+            
+        }
+    }
+    & .additionalInfo{
+        max-width: 370px;
+        & .sizeImg{
+            width: 95%;
+            & .sizeTable{
+                border-collapse: collapse;
+                width: 100%;
+                & td, th {
+                    border: 3px solid #dddddd;
+                    text-align: left;
+                    padding: 8px;
+                  }
+            }
+        }
+    }
+}
+
