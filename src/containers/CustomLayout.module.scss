@@ -1,20 +1,25 @@
 .layout{
     min-height: 100vh;
-    max-width: 1160px;
+    // max-width: 1160px;
     margin: 0 auto;
     & .header{
-        position: 'fixed';
-        z-index: 1;
         width: 100%;
-        max-width: 1160px;
+        // max-width: 1160px;
         display: flex;
         min-height: 80px;
+        & .headerContent{
+            max-width: 1160px;
+            width: 85%;
+            margin: 0 auto;
+            display: flex;
+        }
     }
 }
 .contentWrapper{
     padding: 0 50px;
     margin-top: 15px;
     & .content{
-        
+        max-width: 1160px;
+        margin: 0 auto;
     }
 }

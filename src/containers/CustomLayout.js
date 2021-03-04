@@ -21,21 +21,20 @@ const CustomLayout=(props)=>{
     return (
         <Layout className={styles.layout}>
             <Header className={styles.header}>
-                <div className="logo"></div>
-                <Navigation/>
-                
-                <ul style={{display:"flex", color:"white", margin:0, marginLeft:'auto'}}>
-                    <div style={{display:'flex', justifyContent:"center", alignItems:'center'}}>
-                        <SocialIcon fgColor="white" style={{width:'30px', height:'30px'}} url="https://www.instagram.com/qapidunyasi_/" />
-                        <SocialIcon fgColor="white" style={{width:'30px', height:'30px', marginLeft:"10px"}} url="https://www.facebook.com/QapiDunyasi1" />
-                    </div>
-                    <div style={{display:'flex', flexDirection:'column', justifyContent:'center', marginLeft:'15px'}}>
-                        <span style={{margin:0, padding:0, lineHeight:"20px"}}>Mobil: (+994)70-597-27-10</span>
-                        <span style={{margin:0, padding:0, lineHeight:"20px"}}>E-mail: garadaghlishohrat@gmail.com</span>
-                    </div>
-                   
-                </ul>
+                <div className={styles.headerContent}>
+                    <Navigation style={{marginRight:"auto"}}/>
 
+                    <ul style={{display:"flex", color:"white", margin:0, marginLeft:'auto'}}>
+                        <div style={{display:'flex', justifyContent:"center", alignItems:'center'}}>
+                            <SocialIcon fgColor="white" style={{width:'30px', height:'30px'}} url="https://www.instagram.com/qapidunyasi_/" />
+                            <SocialIcon fgColor="white" style={{width:'30px', height:'30px', marginLeft:"10px"}} url="https://www.facebook.com/QapiDunyasi1" />
+                        </div>
+                        <div style={{display:'flex', flexDirection:'column', justifyContent:'center', marginLeft:'15px'}}>
+                            <span style={{margin:0, padding:0, lineHeight:"20px"}}>Mobil: (+994)70-597-27-10</span>
+                            <span style={{margin:0, padding:0, lineHeight:"20px"}}>E-mail: garadaghlishohrat@gmail.com</span>
+                        </div>
+                    </ul>
+                </div>
             </Header>
             <Content className={styles.contentWrapper}>
             

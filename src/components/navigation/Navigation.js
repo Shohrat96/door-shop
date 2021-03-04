@@ -8,7 +8,7 @@ const mapStateToProps=(state)=>({
     uid:state.auth.uid
 })
 
-const Navigation=connect(mapStateToProps)(({uid})=>{
+const Navigation=connect(mapStateToProps)(({uid, ...rest})=>{
     const routes={
         home:1,
         products:2,
@@ -20,7 +20,7 @@ const Navigation=connect(mapStateToProps)(({uid})=>{
     }
     const location=useLocation().pathname.split("/")[1];
     return (
-        <div className={styles.navWrapper}>
+        <div className={styles.navWrapper} {...rest}>
         <Menu 
             style={{fontSize:"16px", color:'white'}}
             theme="dark" 
