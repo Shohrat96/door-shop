@@ -1,6 +1,10 @@
 .container{
     & .titleSection{
         display: flex;
+        margin-bottom: 1.5rem;
+    }
+    & .sortWrapper{
+        text-align: center;
         margin-bottom: 2rem;
     }
     & .products{

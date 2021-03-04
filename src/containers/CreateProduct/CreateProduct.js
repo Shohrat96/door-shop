@@ -6,6 +6,7 @@ import App from '../../firebase/firebaseConfig';
 import CustomBtn from '../../components/CustomBtn/CustomBtn';
 import { useHistory } from 'react-router-dom'
 import { editProduct, addNewProduct } from '../../store/reducers/products';
+import { connect } from 'react-redux';
 
 const { Option } = Select;
 
@@ -24,12 +25,17 @@ const tailLayout = {
   },
 };
 
-const CreateProduct=(props)=>{
+const mapDispatchToProps=(dispatch)=>({
+  editProduct:(product)=>dispatch(editProduct(product)),
+  addNewProduct:(product)=>dispatch(addNewProduct(product))
+})
+const CreateProduct=connect(null, mapDispatchToProps)((props)=>{
+    const {editProduct, addNewProduct}=props;
     const historyRef=useHistory()
     const [form]=Form.useForm();
     const [initialValues, setInitialValues]=useState(null);
     const {id}=props.match.params;
-    useEffect(()=>{
+    useEffect(()=>{ 
       if (id){
         const prodRef=App.db.ref("products").child(id);
         prodRef.get()
@@ -40,14 +46,9 @@ const CreateProduct=(props)=>{
         });
       }
     },[]);
-    console.log('initial values: ',initialValues);
-    console.log('initial values spread: ',{...initialValues})
 
     const [image, setImage]=useState(null)
     const onChange=(info)=>{
-        if (info.file.status !== 'uploading') {
-          console.log(info.file, info.fileList);
-        }
         if (info.file.status === 'done') {
           message.success(`${info.file.name} file uploaded successfully`);
         } else if (info.file.status === 'error') {
@@ -198,5 +199,5 @@ const CreateProduct=(props)=>{
             </div>
         </div>
     )
-}
+})
 export default CreateProduct

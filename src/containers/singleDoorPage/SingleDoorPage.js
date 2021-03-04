@@ -3,10 +3,13 @@ import App from '../../firebase/firebaseConfig';
 import styles from './SingleDoorPage.module.scss';
 import CustomBtn from '../../components/CustomBtn/CustomBtn';
 import sizeImg from '../../assets/img/door-place-sizes.png'
-import { Table } from 'antd';
+import { Modal, Button } from 'antd';
+import ConfirmModal from '../../components/ConfirmModal/ConfirmModal';
+import SubmitOrderForm from '../../components/SubmitOrderForm/SubmitOrderForm';
 
 
 const SingleDoorPage=(props)=>{
+    const [modalVisible, setModalVisible]=useState(false)
     const {id}=props.match.params;
     const [singleDoor, setSingleDoor]=useState({})
     useEffect(()=>{
@@ -18,9 +21,18 @@ const SingleDoorPage=(props)=>{
             setSingleDoor(result)
         })
     },[])
-    console.log('props: ',props)
     return (
         <div className={styles.container}>
+            <SubmitOrderForm 
+            visible={modalVisible} 
+            onCreate={
+                (values)=>{
+                    App.db.ref("orders").push({order:values,product:singleDoor, isComplete:false, canceled:false});
+                    setModalVisible(false);
+                }
+            }
+            onCancel={()=>setModalVisible(false)}
+            />
             <div className={styles.imgWrap}>
                 {
                     <img className={styles.img} src={singleDoor.image} alt="some-door-pic"/>
@@ -41,7 +53,7 @@ const SingleDoorPage=(props)=>{
 
                 <section className={styles.order}>
                     <input type="number" className={styles.countField} defaultValue={1}/>
-                    <CustomBtn title="Sifariş et"/>
+                    <CustomBtn title="Sifariş et" onClick={()=>setModalVisible(true)} />
                     <p style={{fontStyle:'italic', fontWeight:'bold'}}>
                         Sifariş verin, ən qısa zamanda əməkdaşlarımız Sizinlə əlaqə saxlasınlar.
                     </p>

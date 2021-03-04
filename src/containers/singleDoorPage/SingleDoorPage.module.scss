@@ -2,12 +2,15 @@
     display: flex;
     & .imgWrap{
         width: 25%;
+        min-width: 110px;
         margin-right: 40px;
         & .img{
            width: 100%;
         }
     }
     & .imageData{
+        word-wrap: break-word;
+        max-width: 40%;
         & .seperator{
             border: 1px dashed rgba($color: gray, $alpha: 0.5);
             width: 80%;

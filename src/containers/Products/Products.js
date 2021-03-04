@@ -4,16 +4,21 @@ import styles from './Products.module.scss';
 import CustomBtn from '../../components/CustomBtn/CustomBtn';
 import { useHistory } from 'react-router-dom';
 import ConfirmModal from '../../components/ConfirmModal/ConfirmModal';
-import { setProducts, deleteProduct} from '../../store/reducers/products';
+import { setProducts, deleteProduct, setSortType} from '../../store/reducers/products';
 import { connect } from 'react-redux';
+import { Select } from 'antd';
 
+const {Option}=Select;
 
 const mapStateToProps=(state)=>({
-    products:state.products
+    products:state.products.products,
+    sortType:state.products.sortType,
+    admin:state.auth.uid
 })
 
-const Products=connect(mapStateToProps, {setProducts})((props)=>{
-    const {setProducts, products}=props;
+const Products=connect(mapStateToProps, {setProducts, deleteProduct, setSortType})((props)=>{
+    const {setProducts, deleteProduct, setSortType, sortType}=props;
+    let {products}=props;
     const historyRef=useHistory();
     const [showModal, setShowModal]=useState({
         show:false,
@@ -23,11 +28,14 @@ const Products=connect(mapStateToProps, {setProducts})((props)=>{
 
     useEffect(()=>{
         setProducts();
-    },[setProducts])
+    },[])
 
     const deleteOkHandler=(id)=>{
         deleteProduct(id);
         setShowModal({show:false, prodId:null});
+    }
+    const sortByPrice=(v)=>{
+        setSortType(v)
     }
 
     return (
@@ -64,8 +72,16 @@ const Products=connect(mapStateToProps, {setProducts})((props)=>{
                     KATALOQ
                 </h1>
             </div>
-            
+            <div className={styles.sortWrapper}>
+                <label style={{marginRight:10, fontWeight:'bold', fontSize:'1rem'}}>Sırala</label>
+                <Select value={sortType} defaultValue="asc" style={{ width: 200 }} onChange={(v)=>sortByPrice(v)}>
+                        <Option value="asc">Qiymət üzrə artan</Option>
+                        <Option value="desc">Qiymət üzrə azalan</Option>
+                </Select>
+            </div>
+
             <section className={styles.products}>
+                
                 {
                     !admin?
                     products.map((item,index)=>{

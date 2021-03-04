@@ -3,8 +3,8 @@ import styles from './ConfirmModal.module.scss';
 import { Modal, Button, Space } from 'antd';
 
 
-const ConfirmModal=({onOk, onCancel,visible})=>{
-
+const ConfirmModal=(props)=>{
+  const {onOk, onCancel,visible, children}=props;
     return (
         <Modal
           title="Silmə əməliyyatını təsdiq edin"
@@ -13,7 +13,10 @@ const ConfirmModal=({onOk, onCancel,visible})=>{
           onCancel={onCancel}
           okText="Təsdiqlə"
           cancelText="İmtina"
-        ></Modal>
+          {...props}
+        >
+          {children}
+        </Modal>
     )
 }
 export default ConfirmModal

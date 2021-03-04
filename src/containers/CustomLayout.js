@@ -9,6 +9,11 @@ import Contact from './Contact/Contact';
 import SingleDoorPage from './singleDoorPage/SingleDoorPage';
 import { SocialIcon } from 'react-social-icons';
 import CreateProduct from './CreateProduct/CreateProduct';
+import FavoritesPage from './FavoritesPage/FavoritesPage';
+import OrdersPage from './OrdersPage/OrdersPage';
+import ProtectedRoute from '../components/ProtectedRoute/ProtectedRoute';
+import AuthPage from './AuthPage/AuthPage';
+
 
 const CustomLayout=(props)=>{
     const { Header, Content, Footer } = Layout;
@@ -39,10 +44,13 @@ const CustomLayout=(props)=>{
                     <Route path="/" component={Home} exact />
                     <Route path="/products" component={Products} exact />
                     <Route path="/contact" component={Contact} />
-                    <Route path="/products/newProduct" component={CreateProduct} exact />
-                    <Route path="/products/editProduct/:id" component={CreateProduct} exact />
+                    <Route path="/favorites" component={FavoritesPage}/>
+                    <ProtectedRoute path="/products/newProduct" component={CreateProduct} exact />
+                    <ProtectedRoute path="/products/editProduct/:id" component={CreateProduct} exact />
                     <Route path="/products/:id" component={SingleDoorPage} exact/>
-                    <Route path="/admin" render={(props)=><Products admin={true} {...props}/>} exact />
+                    <ProtectedRoute path="/orders" component={OrdersPage}/>
+                    <ProtectedRoute path="/admin" component={Products}/>
+                    <Route path="/login" component={AuthPage}/>
                 </Switch>
 
             </div>

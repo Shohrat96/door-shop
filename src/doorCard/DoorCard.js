@@ -3,11 +3,32 @@ import { Card } from 'antd';
 import { Link } from 'react-router-dom';
 import { HeartFilled, PlusSquareFilled, PlayCircleOutlined } from '@ant-design/icons';
 import styles from './DoorCard.module.scss';
+import { addToFavAction, removeFromFavAction } from '../store/reducers/products';
+import {connect} from 'react-redux';
 
-const DoorCard=({door, favorites, watchList})=>{
+const mapDispatchToProps=(dispatch)=>({
+    addToFav:(product)=>dispatch(addToFavAction(product)),
+    removeFromFav:(id)=>dispatch(removeFromFavAction(id))
+})
+
+const mapStateToProps=(state)=>({
+    favorites:state.products.favorites
+})
+
+const DoorCard=connect(mapStateToProps, mapDispatchToProps)(({door, favorites, watchList, addToFav, removeFromFav})=>{
+    const toggleFavorite=(door)=>{
+        console.log("door in toggle: ",door)
+        
+        if (favorites.some(item=>item.id===door.id)){
+            console.log("found")
+            removeFromFav(door.id)
+        }else {
+            console.log("not found")
+            addToFav(door)
+        }
+    }
     const [overlay, showOverLay]=useState(false)
     const { Meta } = Card;
-    console.log(door);
     return (
         <div className={styles.cardWrapper}>
             <Link to={`products/${door.id}`}>
@@ -49,23 +70,23 @@ const DoorCard=({door, favorites, watchList})=>{
             <div className={styles.actionsWrapper}>
                 <div className={styles.actions}>
                     <HeartFilled
-                    // onClick={()=>handleToggleFavorite(movie)}
-                    // style={{
-                    //     color:favorites.some(item=>item.id===movie.id)?'red':'black',
-                    //     cursor:"pointer"
-                    //     }} 
+                    onClick={()=>toggleFavorite(door)}
+                    style={{
+                        color:favorites.some(item=>item.id===door.id)?'red':'black',
+                        cursor:"pointer"
+                        }} 
                         />
-                    <PlusSquareFilled 
+                    {/* <PlusSquareFilled 
                     // onClick={()=>handleToggleWatchlist(movie)}
-                    // style={{
-                    //     color:watchList.some(item=>item.id===movie.id)?'red':'black',
-                    //     cursor:"pointer"
-                    //     }}
-                        />
+                    style={{
+                        // color:watchList.some(item=>item.id===movie.id)?'red':'black',
+                        cursor:"pointer"
+                        }}
+                        /> */}
                 </div>
             </div>
         </div>
     )
-}
+})
 
 export default DoorCard
