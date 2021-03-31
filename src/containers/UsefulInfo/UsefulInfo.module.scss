@@ -1,0 +1,39 @@
+.container{
+    & .titleWrapper{
+        & .title{
+            font-size: 24px;
+            font-weight: bolder;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        & .additionalInfoWrap{
+            display: flex;
+            justify-content: space-around;
+
+            & .additionalInfo{
+                max-width: 35%;
+                & .doorType{
+                    text-align: center;
+                }
+                & .infoContent{
+                    & .imgWrapper{
+                        & img{
+                            max-width: 100%;
+                        }
+                    }
+                    & .sizeTable{
+                        border-collapse: collapse;
+                        width: 100%;
+                        & td, th {
+                            border: 3px solid #dddddd;
+                            text-align: left;
+                            padding: 8px;
+                          }
+                    }
+                }
+            
+            }
+ 
+        }
+    }
+}

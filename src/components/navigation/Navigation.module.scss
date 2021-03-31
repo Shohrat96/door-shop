@@ -1,11 +1,9 @@
-.navWrapper{
+.headerContent{
+    position: relative;
+}
+.menuWrapMobile{
+    position: absolute;
+    left: 10px;
     
-    & >ul{
-        height: 100%;
-        display: flex;
-        align-items: center;
-        &>li{
-            line-height: 80px;
-        }
-    }
+
 }

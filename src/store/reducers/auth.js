@@ -17,7 +17,6 @@ export const MODULE_NAME="auth";
 export const reducer=(state=initialState, {type, payload})=>{
     switch (type) {
         case LOG_IN:
-            console.log("auth payload: ",payload)
             return {
                 ...state,
                 ...payload
@@ -31,8 +30,6 @@ export const reducer=(state=initialState, {type, payload})=>{
 export const logIn=(email, password)=>async (dispatch)=>{
     App.auth.signInWithEmailAndPassword(email, password)
     .then((userCredential)=>{
-        console.log("return object: ",userCredential);
-        console.log("user in return: ",userCredential.user);
         dispatch(logInAction({
             email,
             uid:userCredential.user.uid

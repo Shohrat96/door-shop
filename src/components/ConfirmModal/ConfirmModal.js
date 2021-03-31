@@ -13,6 +13,7 @@ const ConfirmModal=(props)=>{
           onCancel={onCancel}
           okText="Təsdiqlə"
           cancelText="İmtina"
+          footer={null}
           {...props}
         >
           {children}

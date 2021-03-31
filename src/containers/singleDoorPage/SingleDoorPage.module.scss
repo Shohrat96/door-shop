@@ -1,9 +1,11 @@
 .container{
     display: flex;
+    justify-content: center;
+
     & .imgWrap{
-        width: 25%;
+        width: 18%;
         min-width: 110px;
-        margin-right: 40px;
+        margin-right: 10%;
         & .img{
            width: 100%;
         }
@@ -29,17 +31,22 @@
             }
         }
 
-        & .metaField{
+        & .metaFieldWrap{
             padding: 5px;
             margin: 0;
-            & .metaLabel{
-                font-size: 16px;
-                font-weight: bold;
+            display: flex;
+            & .metaField{
+                flex: 1;                
+                & .metaLabel{
+                    font-size: 16px;
+                    font-weight: bold;
+                }
+                & .metaValue{
+                    margin: 0;
+                }
             }
-            & .metaValue{
-                margin: 0;
             }
-        }
+ 
         & .title{
             padding-top: 0;
             font-size: 35px
@@ -53,21 +60,6 @@
             color: #fff;
             margin-bottom: 1rem;
             
-        }
-    }
-    & .additionalInfo{
-        max-width: 370px;
-        & .sizeImg{
-            width: 95%;
-            & .sizeTable{
-                border-collapse: collapse;
-                width: 100%;
-                & td, th {
-                    border: 3px solid #dddddd;
-                    text-align: left;
-                    padding: 8px;
-                  }
-            }
         }
     }
 }

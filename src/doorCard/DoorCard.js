@@ -17,7 +17,6 @@ const mapStateToProps=(state)=>({
 
 const DoorCard=connect(mapStateToProps, mapDispatchToProps)(({door, favorites, watchList, addToFav, removeFromFav})=>{
     const toggleFavorite=(door)=>{
-        console.log("door in toggle: ",door)
         
         if (favorites.some(item=>item.id===door.id)){
             console.log("found")

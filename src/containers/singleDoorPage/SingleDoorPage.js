@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import App from '../../firebase/firebaseConfig';
 import styles from './SingleDoorPage.module.scss';
 import CustomBtn from '../../components/CustomBtn/CustomBtn';
-import sizeImg from '../../assets/img/door-place-sizes.png'
 import { Modal, Button } from 'antd';
 import ConfirmModal from '../../components/ConfirmModal/ConfirmModal';
 import SubmitOrderForm from '../../components/SubmitOrderForm/SubmitOrderForm';
@@ -35,7 +34,7 @@ const SingleDoorPage=(props)=>{
             />
             <div className={styles.imgWrap}>
                 {
-                    <img className={styles.img} src={singleDoor.image} alt="some-door-pic"/>
+                    <img className={styles.img} src={singleDoor?.image} alt="some-door-pic"/>
                 }
             </div>
             <div className={styles.imageData}>
@@ -52,7 +51,6 @@ const SingleDoorPage=(props)=>{
                 </div>
 
                 <section className={styles.order}>
-                    <input type="number" className={styles.countField} defaultValue={1}/>
                     <CustomBtn title="Sifariş et" onClick={()=>setModalVisible(true)} />
                     <p style={{fontStyle:'italic', fontWeight:'bold'}}>
                         Sifariş verin, ən qısa zamanda əməkdaşlarımız Sizinlə əlaqə saxlasınlar.
@@ -62,39 +60,25 @@ const SingleDoorPage=(props)=>{
                 <div className={styles.seperator}>
 
                 </div>
+                <div className={styles.metaFieldWrap}>
+                    <div className={styles.metaField}>
+                        <label className={styles.metaLabel}>İstehsalçı ölkə</label>
+                        <p className={styles.metaValue}>{singleDoor.country}fdsfsdf dfsdfdfdfd</p>
+                    </div>
+                    <div className={styles.metaField}>
+                        <label className={styles.metaLabel}>Material</label>
+                        <p className={styles.metaValue}>{singleDoor.material}</p>
+                    </div>
+                    <div className={styles.metaField}>
+                        <label className={styles.metaLabel}>Üzlük</label>
+                        <p className={styles.metaValue}>{singleDoor.cover}</p>
+                    </div>
+                    <div className={styles.metaField}>
+                        <label className={styles.metaLabel}>Əlavə məlumatlar</label>
+                        <p className={styles.metaValue}>{singleDoor.other}</p>
+                    </div>
+                </div>
 
-                <div className={styles.metaField}>
-                    <label className={styles.metaLabel}>İstehsalçı ölkə: </label>
-                    <p className={styles.metaValue}>{singleDoor.country}</p>
-                </div>
-                <div className={styles.metaField}>
-                    <label className={styles.metaLabel}>Material: </label>
-                    <p className={styles.metaValue}>{singleDoor.material}</p>
-                </div>
-                <div className={styles.metaField}>
-                    <label className={styles.metaLabel}>Üzlük: </label>
-                    <p className={styles.metaValue}>{singleDoor.cover}</p>
-                </div>
-                <div className={styles.metaField}>
-                    <label className={styles.metaLabel}>Əlavə məlumatlar: </label>
-                    <p className={styles.metaValue}>{singleDoor.other}</p>
-                </div>
-            </div>
-            <div className={styles.additionalInfo}>
-                <div className={styles.sizeImg}>
-                    <img src={sizeImg} alt="sizes-pic" style={{width:'100%', marginBottom:"10px"}} />
-                    <h3>Qapının yeri üçün tələb olunan ölçülər</h3>
-                    <table className={styles.sizeTable}>
-                        <tr>
-                            <th>En</th>
-                            <th>Hündürlük</th>
-                        </tr>
-                        <tr>
-                            <td>88-90sm</td>
-                            <td>205-207sm</td>
-                        </tr>
-                    </table>
-                </div>
             </div>
         </div>
     )

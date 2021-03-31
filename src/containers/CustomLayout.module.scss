@@ -4,9 +4,13 @@
     margin: 0 auto;
     & .header{
         width: 100%;
-        // max-width: 1160px;
         display: flex;
-        min-height: 80px;
+        background-color: black;
+        position: fixed;
+        z-index: 5;
+        @media screen and (max-width:576px) {
+            padding: 0;
+        }
         & .headerContent{
             max-width: 1160px;
             width: 85%;
@@ -14,12 +18,28 @@
             display: flex;
         }
     }
-}
-.contentWrapper{
-    padding: 0 50px;
-    margin-top: 15px;
-    & .content{
-        max-width: 1160px;
-        margin: 0 auto;
+    & .contentWrapper{
+        padding: 0;
+        margin-top: 15px;
+        position: relative;
+        padding: 0 50px;
+        padding-top: 64px;
+        & .content{
+            margin: 0 auto;
+            min-height: 100vh;
+        }
+    }
+
+    & .footer{
+        padding: 0;
+        & .copyRight{
+            height: 80px;
+            background-color: #001529;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 16px;
+        }
     }
 }

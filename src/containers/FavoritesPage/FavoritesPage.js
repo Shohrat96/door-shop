@@ -13,16 +13,16 @@ const FavoritesPage=connect(mapStateToProps)(({favorites})=>{
         <div className={styles.container}>
             <div className={styles.titleWrapper}>
                 <h1 className={styles.title}>
-                    FAVORITES
+                    BƏYƏNDİKLƏRİM
                 </h1>
             </div>
             <section className={styles.content}>
                 {
-                    favorites.length&&favorites.map((door, index)=>{
+                    favorites.length?favorites.map((door, index)=>{
                         return (
                             <DoorCard door={door} key={index}/>
                         )
-                    })
+                    }):null
                 }
             </section>
         </div>

@@ -56,7 +56,7 @@ const AuthPage=connect(mapStateToProps, {logIn})(({logIn, auth})=>{
                         <Input.Password/>
                     </Form.Item>
                     <Form.Item {...tailLayout}>
-                        <CustomBtn title="Daxil ol"/>
+                        <CustomBtn title="Daxil ol" htmlType="submit"/>
                     </Form.Item>
                 </Form>
             </div>

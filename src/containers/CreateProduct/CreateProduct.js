@@ -47,7 +47,9 @@ const CreateProduct=connect(null, mapDispatchToProps)((props)=>{
       }
     },[]);
 
-    const [image, setImage]=useState(null)
+    const [image, setImage]=useState(null);
+    const [imageAlreadyUploaded, setImageUploaded]=useState(false);
+
     const onChange=(info)=>{
         if (info.file.status === 'done') {
           message.success(`${info.file.name} file uploaded successfully`);
@@ -75,6 +77,15 @@ const CreateProduct=connect(null, mapDispatchToProps)((props)=>{
       };
 
     const customRequest = ({ file, onSuccess }) => {
+      let alreadyUploadedImages=[];
+      const ref= App.storage.ref(`roomDoors`);
+      ref.list().then(snapshot=>{
+        snapshot.items.forEach(item=>alreadyUploadedImages.push(item.name))
+        console.log("result:",alreadyUploadedImages);
+        console.log("file: ",file);
+        if (alreadyUploadedImages.includes(file.name)){
+          setImageUploaded(true);
+        };
         const uploadTask=App.storage.ref(`roomDoors/${file.name}`).put(file);
         uploadTask.on(
             "state_changed",
@@ -91,9 +102,16 @@ const CreateProduct=connect(null, mapDispatchToProps)((props)=>{
                     })
             }
         )
+      })
+
       };
 
       const removeHandler=(img)=>{
+        if (imageAlreadyUploaded){
+          setImage(null);
+          setImageUploaded(false);
+          return
+        }
         const deleteTask=App.storage.ref(`roomDoors/${img.name}`).delete();
         deleteTask
         .then((res)=>{setImage(null)})
@@ -148,6 +166,13 @@ const CreateProduct=connect(null, mapDispatchToProps)((props)=>{
                   <Input/>
                 </Form.Item>
                 <Form.Item
+                  label="Rəng"
+                  name="color"
+                  rules={[{ required: true, message: 'Rəngi qeyd edin!' }]}
+                >
+                  <Input/>
+                </Form.Item>
+                <Form.Item
                   label="Üzlük"
                   name="cover"
                   rules={[{ required: true, message: 'Üzlük materialı qeyd edin!' }]}
@@ -176,15 +201,15 @@ const CreateProduct=connect(null, mapDispatchToProps)((props)=>{
                 >
                   <Select
                   >
-                    <Option value="room">Otaq</Option>
-                    <Option value="iron">Dəmir qapı</Option>
+                    <Option value="1">Otaq</Option>
+                    <Option value="2">Dəmir qapı</Option>
                   </Select>
                 </Form.Item>
 
                 <Form.Item
                   label="Əlavə məlumatlar (vacib deyil)"
                   name="other"
-                  rules={[{ required: false, message: 'İstehsalçı ölkəni qeyd edin!' }]}
+                  rules={[{ required: false }]}
                 >
                   <Input />
                 </Form.Item>

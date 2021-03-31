@@ -9,6 +9,10 @@ const ADD_PRODUCT="ADD_PRODUCT";
 const ADD_TO_FAVORITE="ADD_TO_FAVORITE";
 const REMOVE_FROM_FAVORITE="REMOVE_FROM_FAVORITE";
 const SET_SORT_TYPE="SET_SORT_TYPE"
+const SET_LOADING_TRUE="SET_LOADING_TRUE"
+const SET_LOADING_FALSE="SET_LOADING_FALSE"
+const FILTER_PRODUCTS="FILTER_PRODUCTS";
+
 
 //actions
 const setProductsAction=(producsArr)=>({
@@ -28,6 +32,15 @@ const addProductAction=(product)=>({
     payload:product
 });
 
+
+export const setLoadingTrue=()=>({
+    type:SET_LOADING_TRUE
+})
+
+export const setLoadingFalse=()=>({
+    type:SET_LOADING_FALSE
+})
+
 export const setSortType=(sortType)=>({
     type:SET_SORT_TYPE,
     payload:sortType
@@ -44,21 +57,28 @@ export const removeFromFavAction=(id)=>({
     type:REMOVE_FROM_FAVORITE,
     payload:id
 })
+
+export const filterProducts=(id)=>({
+    type:FILTER_PRODUCTS,
+    payload:id
+})
 //selectors
 export const MODULE_NAME="products";
 
 
 //reducer
 const initialState={
+    loading:false,
     products:[],
+    productsToShow:[],
     favorites:[],
-    sortType:""
+    sortType:"",
+    filterCat:"all"
 };
 
 export function reducer(state=initialState, {type, payload}){
     switch(type){
         case SET_PRODUCTS:
-            console.log("productsL ",payload);
             let stateCopy=state.products
             if (state.sortType==="asc"){
                 stateCopy.sort((a,b)=>a.price-b.price)
@@ -123,25 +143,47 @@ export function reducer(state=initialState, {type, payload}){
         case SET_SORT_TYPE:
             switch (payload) {
                 case "asc":
-                    let productsCopy=state.products;
-                    let productsSorted=productsCopy.sort((a,b)=>a.price-b.price)
+                    let productsCopyAsc=state.productsToShow.length?state.productsToShow:state.products;
+                    let productsSorted=productsCopyAsc.sort((a,b)=>a.price-b.price)
                     return {
                         ...state,
-                        products:productsSorted,
+                        productsToShow:productsSorted,
                         sortType:payload
                     }  
                 case "desc":
-                    let productsCopyDesc=state.products;
+                    let productsCopyDesc=state.productsToShow.length?state.productsToShow:state.products;
                     let productsSortedDesc=productsCopyDesc.sort((a,b)=>b.price-a.price)
                     return {
                         ...state,
-                        products:productsSortedDesc,
+                        productsToShow:productsSortedDesc,
                         sortType:payload
                     }
                 default:
                     return state;
             }
-            
+        case SET_LOADING_TRUE:
+            return {
+                ...state,
+                loading:true
+            }
+        case SET_LOADING_FALSE:
+            return {
+                ...state,
+                loading:false
+            }
+        case FILTER_PRODUCTS:
+            if (payload==="all"){
+                return {
+                    ...state,
+                    filterCat:"all",
+                    productsToShow:state.products
+                }
+            }
+            return {
+                ...state,
+                productsToShow:state.products.filter(item=>item.category==payload),
+                filterCat:payload
+            }
         default :
             return state
     }
@@ -152,6 +194,7 @@ export function reducer(state=initialState, {type, payload}){
 //set products
 export const setProducts=()=>async(dispatch)=>{
     try {
+        dispatch(setLoadingTrue())
         const itemsRef = App.db.ref('products');
         itemsRef.once('value', (snapshot) => {
         let items = snapshot.val();
@@ -163,10 +206,12 @@ export const setProducts=()=>async(dispatch)=>{
         });
         }
         dispatch(setProductsAction(newState))
+        dispatch(setLoadingFalse())
         return newState
         });
     } catch (error) {
         console.log("error: ",error);
+        dispatch(setLoadingFalse())
     }
 }
 
