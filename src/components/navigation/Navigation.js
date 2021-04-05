@@ -4,7 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import styles from './Navigation.module.scss';
 import { connect } from 'react-redux';
 import { useMediaQuery } from 'react-responsive';
-import {MenuUnfoldOutlined, MenuFoldOutlined} from '@ant-design/icons';
+import {MenuUnfoldOutlined} from '@ant-design/icons';
 
 
 const mapStateToProps=(state)=>({
@@ -13,11 +13,11 @@ const mapStateToProps=(state)=>({
 
 const Navigation=connect(mapStateToProps)(({uid, ...rest})=>{
 
-    const isDesktopOrLaptop = useMediaQuery({
-    query: '(min-device-width: 1224px)'
-  })
-    const isBigScreen = useMediaQuery({ query: '(min-device-width: 1824px)' })
-    const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' })
+//     const isDesktopOrLaptop = useMediaQuery({
+//     query: '(min-device-width: 1224px)'
+//   })
+//     const isBigScreen = useMediaQuery({ query: '(min-device-width: 1824px)' })
+//     const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' })
     const isMobileDevice = useMediaQuery({
     query: '(max-device-width: 576px)'
   })
@@ -33,11 +33,10 @@ const Navigation=connect(mapStateToProps)(({uid, ...rest})=>{
     const [menuCollapsed, setMenuCollapsed]=useState(true);
     const location=useLocation().pathname.split("/")[1];
     if (isMobileDevice){
-        console.log("mobile")
         return (
             <div className={styles.menuWrapMobile}>
                 <MenuUnfoldOutlined 
-                style={{color:'white', fontSize:'20px'}}
+                style={{color:'white', fontSize:'30px'}}
                 onClick={()=>setMenuCollapsed(!menuCollapsed)}/>
                 {
                     !menuCollapsed?(
@@ -45,7 +44,7 @@ const Navigation=connect(mapStateToProps)(({uid, ...rest})=>{
                         style={{fontSize:"16px",  backgroundColor:'black'}}
                         className={styles.navWrap}
                         theme="dark" 
-                        onSelect={(e)=>console.log("event: ",e) }
+                        onSelect={()=>setMenuCollapsed(true)}
                         mode="vertical" 
                         selectedKeys={location?[`${routes[location]}`]:["1"]}
                         >
@@ -89,7 +88,6 @@ const Navigation=connect(mapStateToProps)(({uid, ...rest})=>{
             style={{fontSize:"16px",  backgroundColor:'black'}}
             className={styles.navWrap}
             theme="dark" 
-            onSelect={(e)=>console.log("event: ",e) }
             mode="horizontal" 
             selectedKeys={location?[`${routes[location]}`]:["1"]}
             >

@@ -1,6 +1,7 @@
 .container{
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
 
     & .imgWrap{
         width: 18%;
@@ -13,6 +14,9 @@
     & .imageData{
         word-wrap: break-word;
         max-width: 40%;
+        @media screen and (max-width:579px) {
+            max-width: 100%;
+        }
         & .seperator{
             border: 1px dashed rgba($color: gray, $alpha: 0.5);
             width: 80%;
@@ -21,35 +25,57 @@
         & .order{
             display: flex;
             flex-direction: column;
-            & .countField{
-                margin-bottom: 1rem;
-                max-width: 100px;
-                padding: 8px;
-                font-weight: bold;
-                font-size: 16px;
-                outline: none;
-            }
         }
+            & .metaFieldWrap{
+                padding: 5px;
+                margin: 0;
+                display: flex;
+                @media screen and (max-width:992px) {
+                    display: block;
+                }
+                & .metaField{
+                    flex: 1;                
+                    & .metaLabel{
+                        font-size: 16px;
+                        font-weight: bold;
+                    }
+                    & .metaValue{
+                        margin: 0;
+                    }
+                }
+            }
 
-        & .metaFieldWrap{
-            padding: 5px;
-            margin: 0;
-            display: flex;
-            & .metaField{
-                flex: 1;                
-                & .metaLabel{
-                    font-size: 16px;
-                    font-weight: bold;
-                }
-                & .metaValue{
-                    margin: 0;
-                }
-            }
-            }
+        
+
+        // & .metaFieldWrap{
+        //     padding: 5px;
+        //     margin: 0;
+        //     display: flex;
+        //     @media screen and (max-width:992px) {
+        //         display: block;
+        //     }
+        //     & .metaField{
+        //         flex: 1;                
+        //         & .metaLabel{
+        //             font-size: 16px;
+        //             font-weight: bold;
+        //         }
+        //         & .metaValue{
+        //             margin: 0;
+        //         }
+        //     }
+        // }
  
         & .title{
             padding-top: 0;
-            font-size: 35px
+            font-size: 35px;
+            word-wrap: break-word;
+            @media screen and (max-width:768px) {
+                display: block;
+                line-height: 45px;
+                margin-bottom: 5px;
+                text-align: center;
+            }
         }
         & .price{
             font-weight: bold;

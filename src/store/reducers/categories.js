@@ -28,7 +28,6 @@ export const setCategoriesAction=()=>async(dispatch)=>{
         Object.keys(snapshot.val()).forEach(key=>{
             categArr.push(snapshot.val()[key])
         })
-        console.log("vategories: ",categArr);
         dispatch(setCategories(categArr))
     })
 

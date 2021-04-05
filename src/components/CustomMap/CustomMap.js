@@ -39,7 +39,7 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 
 const Map=()=>{
   return (
-    <MapContainer center={[40.4388, 49.7784]} zoom={17} style={{height:'100vh'}} scrollWheelZoom={true}>
+    <MapContainer center={[40.4388, 49.7784]} zoom={17} style={{height:'60vh'}} scrollWheelZoom={false}>
       <TileLayer
         maxZoom={19}
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'

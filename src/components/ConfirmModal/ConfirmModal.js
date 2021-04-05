@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
-import styles from './ConfirmModal.module.scss';
-import { Modal, Button, Space } from 'antd';
+import React from 'react';
+import { Modal } from 'antd';
 
 
 const ConfirmModal=(props)=>{

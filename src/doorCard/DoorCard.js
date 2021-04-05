@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Card } from 'antd';
 import { Link } from 'react-router-dom';
-import { HeartFilled, PlusSquareFilled, PlayCircleOutlined } from '@ant-design/icons';
+import { HeartFilled, PlayCircleOutlined } from '@ant-design/icons';
 import styles from './DoorCard.module.scss';
 import { addToFavAction, removeFromFavAction } from '../store/reducers/products';
 import {connect} from 'react-redux';
@@ -15,7 +15,7 @@ const mapStateToProps=(state)=>({
     favorites:state.products.favorites
 })
 
-const DoorCard=connect(mapStateToProps, mapDispatchToProps)(({door, favorites, watchList, addToFav, removeFromFav})=>{
+const DoorCard=connect(mapStateToProps, mapDispatchToProps)(({door, favorites, watchList, addToFav, removeFromFav, ...rest})=>{
     const toggleFavorite=(door)=>{
         
         if (favorites.some(item=>item.id===door.id)){
@@ -29,7 +29,7 @@ const DoorCard=connect(mapStateToProps, mapDispatchToProps)(({door, favorites, w
     const [overlay, showOverLay]=useState(false)
     const { Meta } = Card;
     return (
-        <div className={styles.cardWrapper}>
+        <div className={styles.cardWrapper} {...rest} >
             <Link to={`products/${door.id}`}>
             <div 
             className={styles.cardContent} 

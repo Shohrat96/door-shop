@@ -9,6 +9,7 @@
     background-size: cover;
     color: white;
     background-attachment: fixed;
+    overflow: hidden;
 
     & .titleWrap{
         text-align: center;
@@ -29,18 +30,18 @@
                 letter-spacing: 35px;
                 animation: movInLeft 3s ease-in forwards;
                 @media screen and (max-width:576px){
-                    font-size: 30px;
-                    letter-spacing: 10px;
+                    font-size: 20px;
+                    letter-spacing: 8px;
                 }
             }
             & .titleSub{
-                font-size: 20px;
+                font-size: 13px;
                 font-weight: 400;
-                letter-spacing: 15px;
+                letter-spacing: 12px;
                 animation: movInRight 3s ease-in forwards;
                 @media screen and (max-width:576px){
                     font-size: 15px;
-                    letter-spacing: 12px;
+                    letter-spacing: 10px;
                 }
             }
         }
@@ -52,6 +53,9 @@
         top: 50%;
         transform: translate(-50%, -50%);
         animation: movInBottom 2s ease-out 0.5s backwards;
+        @media screen and (max-width:576px){
+            top: 40%;
+        }
 
         & .catalogBtn{
             padding: 20px 50px;

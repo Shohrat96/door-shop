@@ -47,7 +47,6 @@ export const setSortType=(sortType)=>({
 })
 
 export const addToFavAction=(product)=>{
-    console.log("inside action: ",product)
     return{
         type:ADD_TO_FAVORITE,
         payload:product
@@ -58,9 +57,9 @@ export const removeFromFavAction=(id)=>({
     payload:id
 })
 
-export const filterProducts=(id)=>({
+export const filterProducts=(doorType)=>({
     type:FILTER_PRODUCTS,
-    payload:id
+    payload:doorType
 })
 //selectors
 export const MODULE_NAME="products";
@@ -84,18 +83,18 @@ export function reducer(state=initialState, {type, payload}){
                 stateCopy.sort((a,b)=>a.price-b.price)
                 return {
                     ...state,
-                    products:stateCopy
+                    products:stateCopy,
                 }
             }else if (state.sortType==="desc"){
                 stateCopy.sort((a,b)=>b.price-a.price)
                 return {
                     ...state,
-                    products:stateCopy
+                    products:stateCopy,
                 }
             }
             return {
                 ...state,
-                products:payload
+                products:payload,
             }
         case EDIT_PRODUCT:
             return {
@@ -117,19 +116,13 @@ export function reducer(state=initialState, {type, payload}){
                 products:state.products.filter(item=>item.id!==payload)
             }
         case ADD_PRODUCT:
-            console.log("inn add reducer : ",{
-                ...state,
-                products:[payload, ...state.products]
-            })
+
             return {
                 ...state,
                 products:[payload, ...state.products]
             }
         case ADD_TO_FAVORITE:
-            console.log("inside add to fav reducer", {
-                ...state,
-                favorites:[payload, ...state.favorites]
-            })
+
             return {
                 ...state,
                 favorites:[payload, ...state.favorites]
@@ -143,7 +136,7 @@ export function reducer(state=initialState, {type, payload}){
         case SET_SORT_TYPE:
             switch (payload) {
                 case "asc":
-                    let productsCopyAsc=state.productsToShow.length?state.productsToShow:state.products;
+                    let productsCopyAsc=state.productsToShow.length?state.productsToShow:[];
                     let productsSorted=productsCopyAsc.sort((a,b)=>a.price-b.price)
                     return {
                         ...state,
@@ -151,7 +144,7 @@ export function reducer(state=initialState, {type, payload}){
                         sortType:payload
                     }  
                 case "desc":
-                    let productsCopyDesc=state.productsToShow.length?state.productsToShow:state.products;
+                    let productsCopyDesc=state.productsToShow.length?state.productsToShow:[];
                     let productsSortedDesc=productsCopyDesc.sort((a,b)=>b.price-a.price)
                     return {
                         ...state,
@@ -172,6 +165,7 @@ export function reducer(state=initialState, {type, payload}){
                 loading:false
             }
         case FILTER_PRODUCTS:
+            
             if (payload==="all"){
                 return {
                     ...state,
@@ -181,8 +175,8 @@ export function reducer(state=initialState, {type, payload}){
             }
             return {
                 ...state,
+                filterCat:payload,
                 productsToShow:state.products.filter(item=>item.category==payload),
-                filterCat:payload
             }
         default :
             return state
@@ -210,7 +204,6 @@ export const setProducts=()=>async(dispatch)=>{
         return newState
         });
     } catch (error) {
-        console.log("error: ",error);
         dispatch(setLoadingFalse())
     }
 }
@@ -241,7 +234,7 @@ export const addNewProduct=(product)=>async (dispatch)=>{
             dispatch(addProductAction({...product, id:key}));
         }
     } catch (error) {
-        
+        console.log("error: ",error)
     }
 
 }
@@ -255,7 +248,6 @@ export const deleteProduct=(id)=>(dispatch)=>{
             if (err){
               console.log('error happened');
             }else {
-                console.log("dispatching delete action")
               dispatch(deleteProductAction(id))
             }
           })

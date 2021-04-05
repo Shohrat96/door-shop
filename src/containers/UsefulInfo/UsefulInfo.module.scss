@@ -9,9 +9,16 @@
         & .additionalInfoWrap{
             display: flex;
             justify-content: space-around;
-
+            @media screen and (max-width:600px) {
+                flex-direction: column;
+                align-items: center;
+            }
             & .additionalInfo{
                 max-width: 35%;
+                @media screen and (max-width:600px) {
+                    max-width: 100%;
+                    margin-bottom: 15px;
+                }
                 & .doorType{
                     text-align: center;
                 }

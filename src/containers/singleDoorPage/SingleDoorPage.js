@@ -2,20 +2,29 @@ import React, { useEffect, useState } from 'react';
 import App from '../../firebase/firebaseConfig';
 import styles from './SingleDoorPage.module.scss';
 import CustomBtn from '../../components/CustomBtn/CustomBtn';
-import { Modal, Button } from 'antd';
-import ConfirmModal from '../../components/ConfirmModal/ConfirmModal';
 import SubmitOrderForm from '../../components/SubmitOrderForm/SubmitOrderForm';
+import { useMediaQuery } from 'react-responsive';
 
 
 const SingleDoorPage=(props)=>{
-    const [modalVisible, setModalVisible]=useState(false)
+    const [modalVisible, setModalVisible]=useState(false);
+    // const isDesktopOrLaptop = useMediaQuery({
+    //     query: '(min-device-width: 1224px)'
+    //   })
+    //     const isBigScreen = useMediaQuery({ query: '(min-device-width: 1824px)' })
+    //     const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' })
+    //     const isMobileDevice = useMediaQuery({
+    //     query: '(max-device-width: 576px)'
+    //   });
+      const isExtraSmall = useMediaQuery({
+        query: '(max-device-width: 450px)'
+      })
     const {id}=props.match.params;
     const [singleDoor, setSingleDoor]=useState({})
     useEffect(()=>{
         let result={};
         let doorRef= App.db.ref('products').child(id);
         doorRef.on('value',(snapshot)=>{
-            console.log('snap: ',snapshot.val());
             result=snapshot.val();
             setSingleDoor(result)
         })
@@ -49,36 +58,80 @@ const SingleDoorPage=(props)=>{
                         Qiymətə daxildir: Qapı, çərçivə, ikiüzlü yaşmaq, kilit-dəstək.
                     </p>
                 </div>
+                {
+                    !isExtraSmall?(
+                        <>
+                        <section className={styles.order}>
+                            <CustomBtn title="Sifariş et" onClick={()=>setModalVisible(true)} />
+                            <p style={{fontStyle:'italic', fontWeight:'bold'}}>
+                                Sifariş verin, ən qısa zamanda əməkdaşlarımız Sizinlə əlaqə saxlasınlar.
+                            </p>
+                        </section>
 
-                <section className={styles.order}>
-                    <CustomBtn title="Sifariş et" onClick={()=>setModalVisible(true)} />
-                    <p style={{fontStyle:'italic', fontWeight:'bold'}}>
-                        Sifariş verin, ən qısa zamanda əməkdaşlarımız Sizinlə əlaqə saxlasınlar.
-                    </p>
-                </section>
+                        <div className={styles.seperator}>
 
-                <div className={styles.seperator}>
+                        </div>
+                        <div className={styles.metaFieldWrap}>
+                            <div className={styles.metaField}>
+                                <label className={styles.metaLabel}>İstehsalçı ölkə</label>
+                                <p className={styles.metaValue}>{singleDoor.country}</p>
+                            </div>
+                            <div className={styles.metaField}>
+                                <label className={styles.metaLabel}>Material</label>
+                                <p className={styles.metaValue}>{singleDoor.material}</p>
+                            </div>
+                            <div className={styles.metaField}>
+                                <label className={styles.metaLabel}>Üzlük</label>
+                                <p className={styles.metaValue}>{singleDoor.cover}</p>
+                            </div>
+                            <div className={styles.metaField}>
+                                <label className={styles.metaLabel}>Əlavə məlumatlar</label>
+                                <p className={styles.metaValue}>{singleDoor.other}</p>
+                            </div>
+                        </div>
+                        </>
+                    ):null
+                }
 
-                </div>
-                <div className={styles.metaFieldWrap}>
-                    <div className={styles.metaField}>
-                        <label className={styles.metaLabel}>İstehsalçı ölkə</label>
-                        <p className={styles.metaValue}>{singleDoor.country}fdsfsdf dfsdfdfdfd</p>
-                    </div>
-                    <div className={styles.metaField}>
-                        <label className={styles.metaLabel}>Material</label>
-                        <p className={styles.metaValue}>{singleDoor.material}</p>
-                    </div>
-                    <div className={styles.metaField}>
-                        <label className={styles.metaLabel}>Üzlük</label>
-                        <p className={styles.metaValue}>{singleDoor.cover}</p>
-                    </div>
-                    <div className={styles.metaField}>
-                        <label className={styles.metaLabel}>Əlavə məlumatlar</label>
-                        <p className={styles.metaValue}>{singleDoor.other}</p>
-                    </div>
-                </div>
+            
+            {
+                isExtraSmall?(
+                    <div style={{flexBasis:'100%',height:'0'}}></div>
+                ):null
+            }
+            {
+                isExtraSmall?(
+                    <div>
+                        <section className={styles.order} style={{display:'flex', flexDirection:'column', alignItems:'center', marginTop:'20px'}}>
+                            <CustomBtn title="Sifariş et" onClick={()=>setModalVisible(true)} />
+                            <p style={{fontStyle:'italic', fontWeight:'bold'}}>
+                            Sifariş verin, ən qısa zamanda əməkdaşlarımız Sizinlə əlaqə saxlasınlar.
+                            </p>
+                        </section>
+                        <div className={styles.seperator}>
 
+                        </div>
+                        <div className={styles.metaFieldWrap}>
+                            <div className={styles.metaField}>
+                                <label className={styles.metaLabel}>İstehsalçı ölkə</label>
+                                <p className={styles.metaValue}>{singleDoor.country}</p>
+                            </div>
+                            <div className={styles.metaField}>
+                                <label className={styles.metaLabel}>Material</label>
+                                <p className={styles.metaValue}>{singleDoor.material}</p>
+                            </div>
+                            <div className={styles.metaField}>
+                                <label className={styles.metaLabel}>Üzlük</label>
+                                <p className={styles.metaValue}>{singleDoor.cover}</p>
+                            </div>
+                            <div className={styles.metaField}>
+                                <label className={styles.metaLabel}>Əlavə məlumatlar</label>
+                                <p className={styles.metaValue}>{singleDoor.other}</p>
+                            </div>
+                        </div>
+                    </div>
+                ): null
+            }
             </div>
         </div>
     )

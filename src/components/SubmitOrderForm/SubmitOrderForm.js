@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Form, Input, Select, InputNumber, Space } from 'antd';
+import React, { useEffect } from 'react';
+import { Form, Input, InputNumber, Space } from 'antd';
 import ConfirmModal from '../ConfirmModal/ConfirmModal';
 import CustomBtn from '../CustomBtn/CustomBtn';
 import styles from './SubmitOrderForm.module.scss';

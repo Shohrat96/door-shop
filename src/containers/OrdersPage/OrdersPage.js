@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { Table, Space } from 'antd';
 import App from '../../firebase/firebaseConfig';
 import { Link } from 'react-router-dom';
-const {Column}=Table;
+// const {Column}=Table;
 
 const mapStateToProps=(state)=>({
     orders:state.orders.data
@@ -83,7 +83,6 @@ const OrdersPage = connect(mapStateToProps, {setOrdersAction})((props)=>{
 
         const {name, count, phone}=data.order;
         const {title, price, id}=data.product;
-        let {canceled, isComplete}=data;
 
         return {
             name,

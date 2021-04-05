@@ -67,6 +67,8 @@ const CreateProduct=connect(null, mapDispatchToProps)((props)=>{
         alert('Choose image')
         return
       } else {
+        console.log("create: ",{...values, image});
+        // let other=values.other || ''
         await addNewProduct({...values, image});
         historyRef.push("/admin")
       }
@@ -81,8 +83,6 @@ const CreateProduct=connect(null, mapDispatchToProps)((props)=>{
       const ref= App.storage.ref(`roomDoors`);
       ref.list().then(snapshot=>{
         snapshot.items.forEach(item=>alreadyUploadedImages.push(item.name))
-        console.log("result:",alreadyUploadedImages);
-        console.log("file: ",file);
         if (alreadyUploadedImages.includes(file.name)){
           setImageUploaded(true);
         };
@@ -139,6 +139,7 @@ const CreateProduct=connect(null, mapDispatchToProps)((props)=>{
                 form={form}
                 name="basic"
                 setFieldsValue={initialValues?{...initialValues}:{}}
+                initialValues={{other:''}}
                 onFinish={onFinish}
                 onFinishFailed={onFinishFailed}
               >

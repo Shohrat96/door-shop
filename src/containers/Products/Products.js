@@ -20,26 +20,34 @@ const mapStateToProps=(state)=>({
     productsToShow:state.products.productsToShow,
     admin:state.auth.uid,
     categories:state.categories,
+    filterCat:state.products.filterCat
 })
 
 const Products=connect(mapStateToProps, {setProducts, deleteProduct, setSortType, setCategoriesAction, filterProducts})((props)=>{
-    const {productsToShow, setProducts, deleteProduct, setSortType, sortType, loading, setCategoriesAction, categories, filterProducts, filterCat}=props;
-    let {products}=props;
+    const {setProducts, deleteProduct, setSortType, sortType, loading, setCategoriesAction, categories, filterProducts, filterCat}=props;
+    let { productsToShow}=props;
+
     const historyRef=useHistory();
     const [showModal, setShowModal]=useState({
         show:false,
         prodId:null
     });
-    if (productsToShow.length>0){
-        products=productsToShow
-    }
+
     const {admin}=props;
 
     useEffect(()=>{
         setProducts();
-        setCategoriesAction()
+        setCategoriesAction();
+        if (localStorage.getItem('scrollPos')){
+            setTimeout( ()=>{
+                window.scrollTo({top:localStorage.getItem('scrollPos')});
+                localStorage.removeItem('scrollPos')         
+            },500);
+        }
     },[])
-
+    if (filterCat==='all'){
+        filterProducts('all')
+    }
     const deleteOkHandler=(id)=>{
         deleteProduct(id);
         setShowModal({show:false, prodId:null});
@@ -48,22 +56,32 @@ const Products=connect(mapStateToProps, {setProducts, deleteProduct, setSortType
         setSortType(v)
     }
     const filterHandler=(selected)=>{
-        console.log("event: ",selected);
         filterProducts(selected);
         if (sortType){
             setSortType(sortType)
         }
     }
+    const onCancel=()=>setShowModal({
+        show:false,
+        prodId:null
+    })
     return (
         <div className={styles.container}>
             <ConfirmModal 
             visible={showModal.show} 
-            onCancel={()=>setShowModal({
-                show:false,
-                prodId:null
-            })}
-            onOk={()=>deleteOkHandler(showModal.prodId)}
-            />
+            onCancel={onCancel}
+            >
+                <CustomBtn 
+                onClick={()=>setShowModal({
+                    show:false,
+                    prodId:null
+                })}
+                title="Ləğv et" 
+                style={{backgroundColor:"white", color:'brown', border:'1px solid brown'}}/>
+                <CustomBtn 
+                onClick={()=>deleteOkHandler(showModal.prodId)}
+                title="Təsdiqlə"/>
+            </ConfirmModal>
             <div className={styles.titleSection}>
                 <h1 className={styles.title}>
                     KATALOQ
@@ -114,13 +132,15 @@ const Products=connect(mapStateToProps, {setProducts, deleteProduct, setSortType
             <section className={styles.products}>
                 {
                     loading?<Loader/> : !admin? (
-                        products.map((item,index)=>{
+                        productsToShow.map((item,index)=>{
                             return (
-                                <DoorCard door={item} key={index}/>
+                                <DoorCard door={item} key={index} onClick={()=>{
+                                    localStorage.setItem('scrollPos',window.scrollY)
+                                }}/>
                             )
                         })
                     ): (
-                        products.map((item,index)=>{
+                        productsToShow.map((item,index)=>{
                             return (
                                 <div className={styles.cardWrapper}>
                                     <DoorCard door={item} key={index}/>

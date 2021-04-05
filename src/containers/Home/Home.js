@@ -9,7 +9,7 @@ const Home=()=>{
         <div className={styles.container}>
             <div className={styles.titleWrap}>
                 <h1 className={styles.title}>
-                    <span className={styles.titleMain}>QAPI DÜNYASI</span>
+                    <span className={styles.titleMain}>DÜNYA QAPILARI</span>
                     <span className={styles.titleSub}>ETİBARINIZ UĞURUMUZDUR</span>
                 </h1>
             </div>
