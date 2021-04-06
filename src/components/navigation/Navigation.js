@@ -24,7 +24,7 @@ const Navigation=connect(mapStateToProps)(({uid, ...rest})=>{
     const routes={
         home:1,
         products:2,
-        contact:3,
+        useful:3,
         favorites:4
     }
     if (uid){
