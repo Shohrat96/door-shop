@@ -2,9 +2,11 @@ import React from 'react';
 import styles from './Home.module.scss'
 import CustomBtn from '../../components/CustomBtn/CustomBtn';
 import { useHistory } from 'react-router-dom';
+import { Result } from 'antd';
 
 const Home=()=>{
     let history=useHistory()
+
     return (
         <div className={styles.container}>
             <div className={styles.titleWrap}>

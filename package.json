@@ -2,6 +2,7 @@
   "name": "door-shop",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://dunyaqapilari.com",
   "dependencies": {
     "@iconify/icons-mdi": "^1.1.13",
     "@iconify/react": "^1.1.4",
