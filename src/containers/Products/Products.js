@@ -37,6 +37,7 @@ const Products=connect(mapStateToProps, {setProducts, deleteProduct, setSortType
 
     useEffect(()=>{
         setProducts();
+        window.scrollTo({top:0, behavior:'smooth'});
         setCategoriesAction();
         if (localStorage.getItem('scrollPos')){
             setTimeout( ()=>{

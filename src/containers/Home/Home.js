@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom';
 import { Result } from 'antd';
 
 const Home=()=>{
-    let history=useHistory()
+    let history=useHistory();
 
     return (
         <div className={styles.container}>
