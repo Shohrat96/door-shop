@@ -139,7 +139,7 @@ const CreateProduct=connect(null, mapDispatchToProps)((props)=>{
                 form={form}
                 name="basic"
                 setFieldsValue={initialValues?{...initialValues}:{}}
-                initialValues={{other:''}}
+                initialValues={{other:'', cover:'', material:'', color:'',country:''}}
                 onFinish={onFinish}
                 onFinishFailed={onFinishFailed}
               >
@@ -162,21 +162,21 @@ const CreateProduct=connect(null, mapDispatchToProps)((props)=>{
                 <Form.Item
                   label="Material"
                   name="material"
-                  rules={[{ required: true, message: 'Materialı qeyd edin!' }]}
+                  rules={[{ required: false}]}
                 >
                   <Input/>
                 </Form.Item>
                 <Form.Item
                   label="Rəng"
                   name="color"
-                  rules={[{ required: true, message: 'Rəngi qeyd edin!' }]}
+                  rules={[{ required: false}]}
                 >
                   <Input/>
                 </Form.Item>
                 <Form.Item
                   label="Üzlük"
                   name="cover"
-                  rules={[{ required: true, message: 'Üzlük materialı qeyd edin!' }]}
+                  rules={[{ required: false }]}
                 >
                   <Input/>
                 </Form.Item>
@@ -184,13 +184,14 @@ const CreateProduct=connect(null, mapDispatchToProps)((props)=>{
                 <Form.Item
                   label="İstehsalçı ölkə"
                   name="country"
-                  rules={[{ required: true, message: 'İstehsalçı ölkəni qeyd edin!' }]}
+                  rules={[{ required: false }]}
                 >
                   <Select
                   >
                     <Option value="Rusiya">Rusiya</Option>
                     <Option value="Ukrayna">Ukrayna</Option>
                     <Option value="Belarusiya">Belarusiya</Option>
+                    <Option value="Türkiyə">Türkiyə</Option>
 
                   </Select>
                 </Form.Item>

@@ -113,7 +113,8 @@ export function reducer(state=initialState, {type, payload}){
         case DELETE_PRODUCT:
             return {
                 ...state,
-                products:state.products.filter(item=>item.id!==payload)
+                products:state.products.filter(item=>item.id!==payload),
+                productsToShow:state.productsToShow.filter(item=>item.id!==payload)
             }
         case ADD_PRODUCT:
 
@@ -241,16 +242,18 @@ export const addNewProduct=(product)=>async (dispatch)=>{
 
 //delete product
 
-export const deleteProduct=(id)=>(dispatch)=>{
+export const deleteProduct=(id, imageRef)=>(dispatch)=>{
     try {
         const prodRef=App.db.ref("products").child(id);
+        const productImgRef=App.storage.ref('roomDoors');
         prodRef.set(null, (err)=>{
             if (err){
               console.log('error happened');
             }else {
               dispatch(deleteProductAction(id))
             }
-          })
+          });
+        productImgRef.child(imageRef).delete()
     } catch (error) {
         console.log("error: ",error)
     }

@@ -30,7 +30,8 @@ const Products=connect(mapStateToProps, {setProducts, deleteProduct, setSortType
     const historyRef=useHistory();
     const [showModal, setShowModal]=useState({
         show:false,
-        prodId:null
+        prodId:null,
+        imageRef:null
     });
 
     const {admin}=props;
@@ -49,9 +50,9 @@ const Products=connect(mapStateToProps, {setProducts, deleteProduct, setSortType
     if (filterCat==='all'){
         filterProducts('all')
     }
-    const deleteOkHandler=(id)=>{
-        deleteProduct(id);
-        setShowModal({show:false, prodId:null});
+    const deleteOkHandler=(id, imageRef)=>{
+        deleteProduct(id, imageRef);
+        setShowModal({show:false, prodId:null, imageRef:null});
     }
     const sortByPrice=(v)=>{
         setSortType(v)
@@ -75,12 +76,13 @@ const Products=connect(mapStateToProps, {setProducts, deleteProduct, setSortType
                 <CustomBtn 
                 onClick={()=>setShowModal({
                     show:false,
-                    prodId:null
+                    prodId:null,
+                    imageRef:null
                 })}
                 title="Ləğv et" 
                 style={{backgroundColor:"white", color:'brown', border:'1px solid brown'}}/>
                 <CustomBtn 
-                onClick={()=>deleteOkHandler(showModal.prodId)}
+                onClick={()=>deleteOkHandler(showModal.prodId, showModal.imageRef)}
                 title="Təsdiqlə"/>
             </ConfirmModal>
             <div className={styles.titleSection}>
@@ -147,7 +149,11 @@ const Products=connect(mapStateToProps, {setProducts, deleteProduct, setSortType
                                     <DoorCard door={item} key={index}/>
                                     <div 
                                     className={styles.deleteBtn}
-                                    onClick={()=>setShowModal({show:true, prodId:item.id})}
+                                    onClick={()=>setShowModal({
+                                        show:true,
+                                        prodId:item.id,
+                                        imageRef:item.image.split("%")[1].split("?")[0].slice(2)
+                                    })}
                                     >X</div>
                                     <div 
                                     style={{position:'absolute', top:"-20px", left:"10px", cursor:"pointer"}}

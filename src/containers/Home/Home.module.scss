@@ -40,8 +40,8 @@
                 letter-spacing: 12px;
                 animation: movInRight 3s ease-in forwards;
                 @media screen and (max-width:576px){
-                    font-size: 15px;
-                    letter-spacing: 10px;
+                    font-size: 13px;
+                    letter-spacing: 5px;
                 }
             }
         }
@@ -53,6 +53,9 @@
         top: 50%;
         transform: translate(-50%, -50%);
         animation: movInBottom 2s ease-out 0.5s backwards;
+        @media screen and (max-width:995px){
+            top: 60%;
+        }
         @media screen and (max-width:576px){
             top: 40%;
         }

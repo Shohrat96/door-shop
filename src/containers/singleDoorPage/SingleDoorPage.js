@@ -4,10 +4,17 @@ import styles from './SingleDoorPage.module.scss';
 import CustomBtn from '../../components/CustomBtn/CustomBtn';
 import SubmitOrderForm from '../../components/SubmitOrderForm/SubmitOrderForm';
 import { useMediaQuery } from 'react-responsive';
+import { connect } from 'react-redux';
+import { setLoadingFalse, setLoadingTrue } from '../../store/reducers/products';
+import Loader from '../../components/Loader/Loader';
 
+const mapStateToProps=(state)=>({
+    loading:state.products.loading
+})
 
-const SingleDoorPage=(props)=>{
+const SingleDoorPage=connect(mapStateToProps,{setLoadingTrue, setLoadingFalse})((props)=>{
     const [modalVisible, setModalVisible]=useState(false);
+    
     // const isDesktopOrLaptop = useMediaQuery({
     //     query: '(min-device-width: 1224px)'
     //   })
@@ -20,18 +27,30 @@ const SingleDoorPage=(props)=>{
         query: '(max-device-width: 450px)'
       })
     const {id}=props.match.params;
+    const {loading, setLoadingFalse, setLoadingTrue}=props;
+
     const [singleDoor, setSingleDoor]=useState({})
     useEffect(()=>{
+        setLoadingTrue();
         let result={};
         let doorRef= App.db.ref('products').child(id);
         doorRef.on('value',(snapshot)=>{
             result=snapshot.val();
-            setSingleDoor(result)
+            setSingleDoor(result);
+            setLoadingFalse()
         })
     },[])
+    if (loading){
+        return (
+            <div className={styles.container}>
+                <Loader/>
+            </div>
+        )
+    }
     return (
         <div className={styles.container}>
             <SubmitOrderForm 
+            isExtraSmall={isExtraSmall}
             visible={modalVisible} 
             onCreate={
                 (values)=>{
@@ -135,6 +154,6 @@ const SingleDoorPage=(props)=>{
             </div>
         </div>
     )
-}
+})
 
 export default SingleDoorPage
