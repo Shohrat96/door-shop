@@ -19,7 +19,7 @@
         }
         & .seperator{
             border: 1px dashed rgba($color: gray, $alpha: 0.5);
-            width: 80%;
+            width: 100%;
             margin: 20px 0;
         }
         & .order{
@@ -27,7 +27,6 @@
             flex-direction: column;
         }
             & .metaFieldWrap{
-                padding: 5px;
                 margin: 0;
                 display: flex;
                 @media screen and (max-width:992px) {
@@ -90,3 +89,18 @@
     }
 }
 
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+  
+  td{
+      background-color: #dddddd;
+  }

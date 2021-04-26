@@ -38,7 +38,10 @@ const location = {
                             <SocialIcon fgColor="white" style={{width:'30px', height:'30px', marginLeft:"10px"}} url="https://www.facebook.com/QapiDunyasi1" />
                         </div>
                         <div style={{display:'flex', flexDirection:'column', justifyContent:'center', margin:'0 10px 0 15px'}}>
-                            <span style={{margin:0, padding:0, lineHeight:"20px"}}>Mobil (WhatsApp): (+994)70-597-27-10</span>
+                            <div style={{display:'flex', lineHeight:'20px'}}>
+                                <span style={{marginRight:'5px', padding:0}}>070-597-27-10 |</span>                            
+                                <span style={{margin:0, padding:0}}>055-539-36-96</span>
+                            </div>
                             <span style={{margin:0, padding:0, lineHeight:"20px"}}>E-mail: dunya.qapilari.contact@gmail.com</span>
                         </div>
                     </ul>

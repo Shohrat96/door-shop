@@ -44,8 +44,8 @@ const DoorCard=connect(mapStateToProps, mapDispatchToProps)(({door, favorites, w
                 <img 
                 alt="movie poster" 
                 style={{height:320, width:180}}
-                src={door.image?
-                    door.image : "https://motivatevalmorgan.com/wp-content/uploads/2016/06/default-movie-1-200x200.jpg"} />
+                src={door.thumbnail?
+                    door.thumbnail : "https://motivatevalmorgan.com/wp-content/uploads/2016/06/default-movie-1-200x200.jpg"} />
                     }
             >
             <Meta 

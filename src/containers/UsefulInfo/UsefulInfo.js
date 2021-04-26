@@ -31,7 +31,7 @@ const UsefulInfo=()=>{
                         </div>
                     </div>
                     <div className={styles.additionalInfo}>
-                        <h2 className={styles.doorType}>Dəmir qapılar</h2>
+                        <h2 className={styles.doorType}>Giriş qapıları</h2>
                         <div className={styles.infoContent}>
                         <div className={styles.imgWrapper}>
                             <img src={sizeEntryDoorImg} alt="sizes-pic"/>

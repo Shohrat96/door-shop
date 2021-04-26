@@ -81,9 +81,10 @@ const SingleDoorPage=connect(mapStateToProps,{setLoadingTrue, setLoadingFalse})(
                     !isExtraSmall?(
                         <>
                         <section className={styles.order}>
-                            <CustomBtn title="Sifariş et" onClick={()=>setModalVisible(true)} />
+                            <CustomBtn title="Sorğu göndər" onClick={()=>setModalVisible(true)} />
                             <p style={{fontStyle:'italic', fontWeight:'bold'}}>
-                                Sifariş verin, ən qısa zamanda əməkdaşlarımız Sizinlə əlaqə saxlasınlar.
+                                Sifariş verin, ən qısa zamanda əməkdaşlarımız Sizinlə əlaqə saxlasınlar.<br/> 
+                                Çatdırılma və quraşdırılma tərəfimizdən ən yüksək səviyyədə təmin edilir.
                             </p>
                         </section>
 
@@ -91,7 +92,21 @@ const SingleDoorPage=connect(mapStateToProps,{setLoadingTrue, setLoadingFalse})(
 
                         </div>
                         <div className={styles.metaFieldWrap}>
-                            <div className={styles.metaField}>
+                        <table>
+                            <tr>
+                                <th>Ölkə</th>
+                                <th>Material</th>
+                                <th>Üzlük</th>
+                                <th>Kateqoriya</th>
+                            </tr>
+                            <tr>
+                                <td>{singleDoor.country}</td>
+                                <td>{singleDoor.material}</td>
+                                <td>{singleDoor.cover}</td>
+                                <td>{singleDoor.category===1? 'Otaq':'Giriş qapısı'}</td>
+                            </tr>
+                        </table>
+                            {/* <div className={styles.metaField}>
                                 <label className={styles.metaLabel}>İstehsalçı ölkə</label>
                                 <p className={styles.metaValue}>{singleDoor.country}</p>
                             </div>
@@ -106,7 +121,7 @@ const SingleDoorPage=connect(mapStateToProps,{setLoadingTrue, setLoadingFalse})(
                             <div className={styles.metaField}>
                                 <label className={styles.metaLabel}>Əlavə məlumatlar</label>
                                 <p className={styles.metaValue}>{singleDoor.other}</p>
-                            </div>
+                            </div> */}
                         </div>
                         </>
                     ):null
@@ -122,7 +137,7 @@ const SingleDoorPage=connect(mapStateToProps,{setLoadingTrue, setLoadingFalse})(
                 isExtraSmall?(
                     <div>
                         <section className={styles.order} style={{display:'flex', flexDirection:'column', alignItems:'center', marginTop:'20px'}}>
-                            <CustomBtn title="Sifariş et" onClick={()=>setModalVisible(true)} />
+                            <CustomBtn title="Sorğu göndər" onClick={()=>setModalVisible(true)} />
                             <p style={{fontStyle:'italic', fontWeight:'bold'}}>
                             Sifariş verin, ən qısa zamanda əməkdaşlarımız Sizinlə əlaqə saxlasınlar.
                             </p>
