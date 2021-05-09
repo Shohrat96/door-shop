@@ -14,6 +14,7 @@ import OrdersPage from './OrdersPage/OrdersPage';
 import ProtectedRoute from '../components/ProtectedRoute/ProtectedRoute';
 import AuthPage from './AuthPage/AuthPage';
 import CustomMap from '../components/CustomMap/CustomMap';
+import WorksDone from './WorksDone/WorksDone';
 
 
 const CustomLayout=(props)=>{
@@ -60,6 +61,8 @@ const location = {
                         <ProtectedRoute path="/orders" component={OrdersPage}/>
                         <ProtectedRoute path="/admin" component={Products}/>
                         <Route path="/login" component={AuthPage}/>
+                        <Route path="/portfolio" component={WorksDone}/>
+
                     </Switch>
 
                 </div>

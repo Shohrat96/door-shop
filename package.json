@@ -13,6 +13,7 @@
     "antd": "^4.12.3",
     "axios": "^0.21.1",
     "firebase": "^8.2.9",
+    "framer-motion": "^4.1.10",
     "google-map-react": "^2.1.9",
     "leaflet": "^1.7.1",
     "node-sass": "^5.0.0",

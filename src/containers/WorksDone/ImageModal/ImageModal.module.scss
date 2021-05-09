@@ -1,0 +1,44 @@
+.backdrop{
+    //background-color: black;
+    position: fixed;
+    z-index: 5;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    & .mainContent{
+        width: 500px;
+        height: 500px;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 2px solid white;
+        box-shadow: 3px 5px 7px rgba(0, 0, 0, 0.5);
+        & .closeIcon{
+            position: absolute;
+            right: -17px;
+            top: -27px;
+            font-size: 20px;
+            color: white;
+            font-weight: bolder;
+            cursor: pointer;
+        }
+        & .imgWrapper{
+            max-width: 60%;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            & img{
+                object-fit: cover;
+                max-width: 80%;
+                max-height: 80%;
+            }
+        }
+    }
+}
